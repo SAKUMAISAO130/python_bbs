@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>paiza bbs</title>
+        <style>body {padding: 10px;}</style>
+    </head>
+    <body>
+        <h1>paiza bbs</h1>
+        <p>{{ message }}</p>
+        {% for article in articles %}
+            <p>{{ article.content }}</p>
+                <a href='{% url "bbs:detail" article.id %}'>詳細</a>
+        {% endfor %}
+    </body>
+</html>
