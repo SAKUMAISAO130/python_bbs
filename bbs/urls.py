@@ -13,7 +13,16 @@ urlpatterns = [
     #Create
     path('create', views.create, name='create'),
 
+    #アクション　new
+    path('new', views.new, name='new'),
+
     #Detail
     path('<int:id>/delete', views.delete, name='delete'),
+
+    #Edit
+    path('<int:id>/edit', views.edit, name='edit'),
+
+    #アクション　update
+    path('<int:id>/update', views.update, name='update'),
 
 ]
