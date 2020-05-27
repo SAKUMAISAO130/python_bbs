@@ -120,3 +120,48 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+
+#
+# ログ設定
+#
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'local': {
+            'format': '%(asctime)s [%(levelname)s] %(pathname)s:%(lineno)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'local',
+        },
+    },
+    'loggers': {
+        # 自作したログ出力
+        '': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+            'filename': '/logs/loggers.log', # ログファイルのパスを指定
+        },
+        # Djangoのエラー・警告・開発WEBサーバのアクセスログ
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+            'filename': '/logs/django.log', # ログファイルのパスを指定
+        },
+        # 実行SQL
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+            'filename': '/logs/sql.log', # ログファイルのパスを指定
+        },
+    }
+}

@@ -25,4 +25,7 @@ urlpatterns = [
     #アクション　update
     path('<int:id>/update', views.update, name='update'),
 
+    #Create Comment
+    path('<int:id>/create_comment', views.create_comment, name='create_comment'),
+
 ]

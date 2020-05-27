@@ -1,10 +1,38 @@
 {% extends './base.html' %}
+{% load bootstrap4 %}
 {% block content %}
-    <h1>paiza bbs</h1>
-    <p>{{ message }}</p>
-    <p>{{ article.content }}, {{ article.user_name }}</p>
-    <p>
-        <a href='{% url "bbs:edit" article.id %}' class='btn btn-sm btn-outline-primary'>詳細</a>
-        <a href='{% url "bbs:index" %}' class='btn btn-sm btn-outline-primary'>一覧</a>
-    </p>
+    <div>
+        <p>
+            <a href='{% url "bbs:index" %}' class='btn btn-sm btn-outline-primary'>一覧へ戻る</a>
+        </p>
+    </div>
+    <div class="alert alert-info">
+        <h1>詳細</h1>
+        <p>{{ message }}</p>
+        <p>{{ article.id }}</p>
+        <p>{{ article.content }}</p>
+        <p>{{ article.user_name }}</p>
+        <p>{{ article.category }}</p>
+        <p>{{ article.content_area }}</p>
+        <p>
+            <a href='{% url "bbs:edit" article.id %}' class='btn btn-sm btn-outline-primary'>編集</a>
+        </p>
+    </div>
+
+    {% for comment in comments %}
+    <div class="alert alert-light border-top" style="padding:10px;">
+        <p class="text-success">[{{ comment.id }}]  {{ comment.user_name }}　さん</p>
+        <p>{{ comment.comment }}</p>
+        <p class="text-success"></p>
+    </div>
+    {% endfor %}
+
+
+    <div class="alert alert-secondary">
+        <form action='{% url "bbs:create_comment" article.id %}' method='post' class='form'>
+            {% csrf_token %}
+            {% bootstrap_form commentForm layout='horizontal' %}
+            <button type='submit' class='btn btn-sm btn-outline-primary'>コメントする</button>
+        </form>
+    </div>
 {% endblock %}
